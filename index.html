@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<head>
+    <title>Motivational Quote Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,100..1000;1,100..1000&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #eeb329c0;
+            color: #000000;
+            text-align: center;
+        }
+
+        .container {
+            width: auto;
+            min-width: 700px;
+            height: auto;
+
+            padding-top: 10px;
+
+            gap: 0px;
+            display: grid;
+        }
+
+        .container p {
+            font-weight: 300;
+            font-size: 19px;
+            margin-bottom: 30px;
+        }
+
+        .container button {
+            border: none;
+            border-radius: 7px;
+            color: white;
+            font-family: "DM Sans", sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            text-decoration: none;
+
+            height: 40px;
+            gap: 8px;
+            display: inline-flex;
+            align-items: center;
+
+            background-color: #000000;
+            padding: 2px 13px;
+        }
+
+        .container button:hover {
+            cursor: pointer
+        }
+
+        .container-box {
+            border: 0px black solid;
+        }
+
+        .top {
+            grid-column: 1;
+            grid-row: 1;
+
+            line-height: 11px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .top h1 {
+            font-size: 47px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .top p {
+            font-size: 22px;
+            font-weight: 300;
+        }
+
+        .middle {
+            grid-column: 1;
+            grid-row: 2;
+
+            padding-top: 20px;
+            padding-bottom: 30px;
+
+            gap: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .bottom {
+            grid-column: 1;
+            grid-row: 3;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .bottom p {
+            font-size: 19px;
+            font-weight: 300;
+
+            padding: 15px;
+            background: linear-gradient(to right, #f3efdf, #e2ddd2);
+            border-radius: 15px;
+        }
+
+        #quoteAuthor {
+            font-size: 16px;
+            font-style: italic;
+            
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-box top">
+            <h1>Motivational Quote Generator</h1>
+            <p>Click the button to get a new motivational quote.</p>
+        </div>
+        <div class="container-box middle">
+            <button onclick="generateQuote()">Get inspired<img style="filter: invert(1); width: 30px; height: 30px;" src="../website/assets/navigation-icons/right-arrow.png"></button>
+        </div>
+        <div class="container-box bottom">
+            <p>
+                <span id="quoteText">Believe you can and you're halfway there.</span>
+                <span id="quoteAuthor">- Theodore Roosevelt</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const quotes = [
+            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+            { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+            { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
+            { text: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Anonymous" },
+            { text: "Success is not in what you have, but who you are.", author: "Bo Bennett" },
+            { text: "Dream big and dare to fail.", author: "Norman Vaughan" },
+            { text: "Everything you can imagine is real.", author: "Pablo Picasso" },
+            { text: "Act as if what you do makes a difference. It does.", author: "William James" },
+            { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
+            { text: "You are never too old to set another goal or to dream a new dream.", author: "C.S. Lewis" },
+            { text: "Push yourself, because no one else is going to do it for you.", author: "Anonymous" },
+            { text: "Great things never come from comfort zones.", author: "Anonymous" },
+            { text: "Success doesn't just find you. You have to go out and get it.", author: "Anonymous" },
+            { text: "The future depends on what you do today.", author: "Mahatma Gandhi" },
+            { text: "Doubt kills more dreams than failure ever will.", author: "Suzy Kassem" },
+            { text: "Small steps in the right direction can turn out to be the biggest steps of your life.", author: "Anonymous" },
+            { text: "Work hard in silence, let your success be your noise.", author: "Frank Ocean" },
+            { text: "Stay positive, work hard, make it happen.", author: "Anonymous" },
+            { text: "You don't have to be perfect to be amazing.", author: "Anonymous" },
+            { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" },
+            { text: "Your time is limited, so don’t waste it living someone else’s life.", author: "Steve Jobs" },
+            { text: "If you want to achieve greatness stop asking for permission.", author: "Anonymous" },
+            { text: "Do something today that your future self will thank you for.", author: "Anonymous" },
+            { text: "Don’t let yesterday take up too much of today.", author: "Will Rogers" },
+            { text: "It always seems impossible until it’s done.", author: "Nelson Mandela" },
+            { text: "What lies behind us and what lies before us are tiny matters compared to what lies within us.", author: "Ralph Waldo Emerson" },
+            { text: "I am not a product of my circumstances. I am a product of my decisions.", author: "Stephen Covey" },
+            { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+            { text: "Opportunities don't happen. You create them.", author: "Chris Grosser" },
+            { text: "Hardships often prepare ordinary people for an extraordinary destiny.", author: "C.S. Lewis" },
+            { text: "Success usually comes to those who are too busy to be looking for it.", author: "Henry David Thoreau" },
+            { text: "Start each day with a positive thought and a grateful heart.", author: "Roy T. Bennett" },
+            { text: "Whether you think you can or you think you can’t, you’re right.", author: "Henry Ford" },
+            { text: "Go the extra mile. It’s never crowded.", author: "Wayne Dyer" },
+            { text: "You become what you believe.", author: "Oprah Winfrey" },
+            { text: "The best way to predict the future is to create it.", author: "Peter Drucker" },
+            { text: "Don’t count the days, make the days count.", author: "Muhammad Ali" },
+            { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
+            { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+            { text: "Be yourself; everyone else is already taken.", author: "Oscar Wilde" }
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const selectedQuote = quotes[randomIndex];
+
+            document.getElementById("quoteText").innerText = selectedQuote.text;
+            document.getElementById("quoteAuthor").innerText = `- ${selectedQuote.author}`;
+        }
+    </script>
+</body>
+</html>
